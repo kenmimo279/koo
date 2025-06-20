@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Baccarat Analyzer V2</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>🔍 Baccarat Analyzer V2</h2>
+  <p>สูตร: ตัวน้อยสุด + ตัวมากสุด (ใส่เค้าไพ่ 6 ตัว เช่น <b>PBBPBP</b>)</p>
+
+  <div>
+    <input id="comboInput" maxlength="6" placeholder="เช่น PBBPBP">
+    <button onclick="analyze()">วิเคราะห์</button>
+  </div>
+
+  <div class="result-block">
+    <div><strong>สูตรตัวน้อยสุด:</strong> <span id="leastResult">-</span></div>
+    <div class="dna">DNA: <span id="leastDNA"></span></div>
+  </div>
+
+  <div class="result-block">
+    <div><strong>สูตรตัวมากสุด:</strong> <span id="mostResult">-</span></div>
+    <div class="dna">DNA: <span id="mostDNA"></span></div>
+  </div>
+
+  <div class="section">
+    <strong>ผลจริง:</strong>
+    <button onclick="recordResult('P')">P</button>
+    <button onclick="recordResult('B')">B</button>
+    <button onclick="recordResult('T')">T</button>
+  </div>
+
+  <div class="section">
+    <button onclick="resetDNA()">🧹 ล้าง DNA</button>
+  </div>
+
+  <script src="analyzer.js"></script>
+</body>
+</html>
