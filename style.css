@@ -4,7 +4,7 @@ body {
   background: #1e1e2f;
   color: #f2f2f2;
   padding: 30px;
-  max-width: 600px;
+  max-width: 650px;
   margin: auto;
 }
 
@@ -18,6 +18,7 @@ h1 {
   text-align: center;
   color: #ccc;
   margin-bottom: 30px;
+  line-height: 1.4em;
 }
 
 .input-area {
@@ -28,7 +29,7 @@ h1 {
 }
 
 input[type="text"] {
-  width: 140px;
+  width: 150px;
   padding: 8px;
   font-size: 20px;
   border-radius: 6px;
@@ -45,21 +46,21 @@ button {
   background: #00c3ff;
   color: #000;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.25s;
 }
 
 button:hover {
   background: #00f2ff;
 }
 
-.result-card {
+.result-card, .trace-card {
   background: #2d2d44;
   padding: 15px;
   margin-top: 15px;
   border-radius: 10px;
 }
 
-.result-card h3 {
+.result-card h3, .trace-card h3 {
   margin-top: 0;
   color: #aaffff;
 }
@@ -73,6 +74,24 @@ button:hover {
   font-size: 22px;
   word-wrap: break-word;
   color: #ffecb3;
+}
+
+.trace-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.trace-table th, .trace-table td {
+  border: 1px solid #555;
+  padding: 4px 6px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.trace-table th {
+  background: #404060;
+  color: #fff;
 }
 
 .actions {

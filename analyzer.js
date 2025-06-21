@@ -42,28 +42,49 @@ function analyzeMost(major, secondary) {
   const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
   if (sorted.length < 1) return '-';
 
-  const top1 = sorted[0][0];
-  const top2 = (sorted.length > 1) ? sorted[1][0] : null;
-
-  const positions = base
-    .map((val, idx) => (val === top1 || val === top2) ? idx : -1)
-    .filter(i => i !== -1);
-
+  // pick a top value with count>=2 if exists, else fallback to next
+  let topVal = sorted[0][0];
+  for (let [val, cnt] of sorted) {
+    if (cnt >= 2) { topVal = val; break; }
+  }
+  // collect positions with that value; if still <2, add next value
+  let positions = base.map((v, idx) => v === topVal ? idx : -1).filter(i => i !== -1);
+  if (positions.length < 2 && sorted.length > 1) {
+    const secondVal = sorted.find(x => x[0] !== topVal)[0];
+    positions = positions.concat(base.map((v, idx) => v === secondVal ? idx : -1).filter(i => i !== -1));
+  }
   if (positions.length < 2) return '-';
-  const [i1, i2] = positions;
+  const [i1, i2] = positions.slice(0,2);
 
-  if (!comp[i1] || !comp[i2]) return '-';
-  return (comp[i1] === comp[i2]) ? 'P' : 'B';
+  const val1 = comp[i1];
+  const val2 = comp[i2];
+  return (val1 === val2) ? 'P' : 'B';
+}
+
+function buildTraceTable(combo) {
+  const rows = [];
+  for (let i = 0; i < 6; i++) {
+    const val = combo[i];
+    const group = (i < 3) ? 'หลัก' : 'รอง';
+    const pos = (i % 3) + 1;
+    rows.push(`<tr><td>${i+1}</td><td>${val}</td><td>${group}</td><td>${pos}</td></tr>`);
+  }
+  return `
+    <table class="trace-table">
+      <thead><tr><th>ตัวที่</th><th>ค่า</th><th>ฝ่าย</th><th>ช่องที่</th></tr></thead>
+      <tbody>${rows.join('')}</tbody>
+    </table>
+  `;
 }
 
 function analyze() {
-  const input = document.getElementById('comboInput').value.toUpperCase();
-  if (input.length !== 6) {
-    alert("กรุณาใส่เค้าไพ่ 6 ตัว เช่น PBBPBP");
+  const combo = document.getElementById('comboInput').value.toUpperCase();
+  if (combo.length !== 6 || /[^PB]/.test(combo)) {
+    alert("กรุณาใส่เค้าไพ่ 6 ตัว (P หรือ B เท่านั้น) เช่น PBBPBP");
     return;
   }
-  const major = input.slice(0, 3).split('');
-  const secondary = input.slice(3).split('');
+  const major = combo.slice(0, 3).split('');
+  const secondary = combo.slice(3).split('');
 
   const least = analyzeLeast(major, secondary);
   const most = analyzeMost(major, secondary);
@@ -73,6 +94,9 @@ function analyze() {
 
   localStorage.setItem('currentLeast', least);
   localStorage.setItem('currentMost', most);
+
+  // build trace table
+  document.getElementById('traceTable').innerHTML = buildTraceTable(combo);
 }
 
 function recordResult(actual) {
@@ -97,4 +121,5 @@ function resetDNA() {
   round = 0;
   document.getElementById('leastDNA').innerText = '';
   document.getElementById('mostDNA').innerText = '';
+  document.getElementById('traceTable').innerHTML = '— ยังไม่มีข้อมูล —';
 }

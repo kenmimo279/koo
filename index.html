@@ -3,12 +3,12 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>Baccarat Analyzer V2</title>
+  <title>Baccarat Analyzer V3</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎲 Baccarat Analyzer V2</h1>
-  <p class="desc">สูตรตัวน้อยสุด + ตัวมากสุด | กรอกเค้าไพ่ 6 ตัว เช่น <code>PBBPBP</code></p>
+  <h1>🎲 Baccarat Analyzer V3</h1>
+  <p class="desc">สูตรตัวน้อยสุด + ตัวมากสุด<br>ใส่เค้าไพ่ 6 ตัว (เช่น <code>PBBPBP</code>)</p>
 
   <div class="input-area">
     <input id="comboInput" maxlength="6" placeholder="PBBPBP">
@@ -25,6 +25,11 @@
     <h3>สูตรตัวมากสุด</h3>
     <div class="result">ทำนาย: <span id="mostResult">-</span></div>
     <div class="dna">DNA: <span id="mostDNA"></span></div>
+  </div>
+
+  <div class="trace-card">
+    <h3>🔎 ตรวจตำแหน่ง 6 ตัวล่าสุด</h3>
+    <div id="traceTable">— ยังไม่มีข้อมูล —</div>
   </div>
 
   <div class="actions">
