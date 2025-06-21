@@ -4,7 +4,10 @@ let dnaMost = [];
 let round = 0;
 
 function countFreq(arr) {
-  return arr.reduce((acc, val) => (acc[val] = (acc[val] || 0) + 1, acc), {});
+  return arr.reduce((acc, val) => {
+    acc[val] = (acc[val] || 0) + 1;
+    return acc;
+  }, {});
 }
 
 function analyzeLeast(major, secondary) {
@@ -17,10 +20,13 @@ function analyzeLeast(major, secondary) {
   let comp = (base === major) ? secondary : major;
 
   const freq = countFreq(base);
-  const least = Object.entries(freq).sort((a, b) => a[1] - b[1])[0][0];
+  const sorted = Object.entries(freq).sort((a, b) => a[1] - b[1]);
+  if (sorted.length === 0) return '-';
+  const least = sorted[0][0];
+
   const index = base.indexOf(least);
-  const compare = comp[index];
-  return (compare === least) ? 'P' : 'B';
+  if (index === -1 || !comp[index]) return '-';
+  return (comp[index] === least) ? 'P' : 'B';
 }
 
 function analyzeMost(major, secondary) {
@@ -34,13 +40,20 @@ function analyzeMost(major, secondary) {
 
   const freq = countFreq(base);
   const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
-  const topTwo = sorted.slice(0, 2).map(x => x[0]);
-  const positions = base.map((v, i) => topTwo.includes(v) ? i : -1).filter(i => i !== -1);
-  if (positions.length < 2) return '-';
+  if (sorted.length < 1) return '-';
 
+  const top1 = sorted[0][0];
+  const top2 = (sorted.length > 1) ? sorted[1][0] : null;
+
+  const positions = base
+    .map((val, idx) => (val === top1 || val === top2) ? idx : -1)
+    .filter(i => i !== -1);
+
+  if (positions.length < 2) return '-';
   const [i1, i2] = positions;
-  const c1 = comp[i1], c2 = comp[i2];
-  return (c1 === c2) ? 'P' : 'B';
+
+  if (!comp[i1] || !comp[i2]) return '-';
+  return (comp[i1] === comp[i2]) ? 'P' : 'B';
 }
 
 function analyze() {
