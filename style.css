@@ -1,30 +1,86 @@
 
 body {
-  font-family: sans-serif;
-  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background: #1e1e2f;
+  color: #f2f2f2;
+  padding: 30px;
   max-width: 600px;
   margin: auto;
 }
+
+h1 {
+  text-align: center;
+  color: #00f2ff;
+  margin-bottom: 10px;
+}
+
+.desc {
+  text-align: center;
+  color: #ccc;
+  margin-bottom: 30px;
+}
+
+.input-area {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
 input[type="text"] {
-  width: 120px;
-  font-size: 18px;
+  width: 140px;
+  padding: 8px;
+  font-size: 20px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
   text-align: center;
 }
-.section {
+
+button {
+  padding: 8px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background: #00c3ff;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #00f2ff;
+}
+
+.result-card {
+  background: #2d2d44;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+.result-card h3 {
+  margin-top: 0;
+  color: #aaffff;
+}
+
+.result {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.dna {
+  font-size: 22px;
+  word-wrap: break-word;
+  color: #ffecb3;
+}
+
+.actions {
+  text-align: center;
   margin-top: 20px;
 }
-.dna {
-  font-size: 20px;
-  margin-top: 10px;
-  word-wrap: break-word;
-}
-button {
-  margin-right: 5px;
-  margin-top: 5px;
-}
-.result-block {
-  padding: 10px;
-  border: 1px solid #ccc;
-  margin-top: 10px;
-  border-radius: 8px;
+
+.reset-btn {
+  background: #ff4d4d;
+  color: white;
 }

@@ -74,6 +74,8 @@ function recordResult(actual) {
 
   document.getElementById('leastDNA').innerText = dnaLeast.join('');
   document.getElementById('mostDNA').innerText = dnaMost.join('');
+
+  document.getElementById('comboInput').value = '';
 }
 
 function resetDNA() {
